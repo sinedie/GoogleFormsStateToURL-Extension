@@ -15,7 +15,7 @@ function init() {
     });
 
     function GetPrefilledURL() {
-      const url = new URL(window.location.href);
+      const url = new URL(window.location.href.split("?")[0]);
       document.querySelectorAll("input[type='hidden']").forEach((input) => {
         if (!input.name.startsWith("entry.") || !input.value) return;
         url.searchParams.append(input.name, input.value);

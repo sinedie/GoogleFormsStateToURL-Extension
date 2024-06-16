@@ -2,7 +2,7 @@ function init() {
   if (window.isGoogleFormsStateToURLActive === true) return;
   window.isGoogleFormsStateToURLActive = true;
 
-  browser.runtime.onConnect.addListener((port) => {
+  (browser ?? chrome).runtime.onConnect.addListener((port) => {
     if (port.name !== "googleFormsStateToURL") return;
 
     port.onMessage.addListener((msg) => {

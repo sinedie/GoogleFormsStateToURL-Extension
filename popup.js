@@ -1,10 +1,10 @@
 async function init() {
-  let [tab] = await browser.tabs.query({
+  let [tab] = await (browser ?? chrome).tabs.query({
     active: true,
     currentWindow: true,
   });
 
-  const port = browser.tabs.connect(tab.id, {
+  const port = (browser ?? chrome).tabs.connect(tab.id, {
     name: "googleFormsStateToURL",
   });
 

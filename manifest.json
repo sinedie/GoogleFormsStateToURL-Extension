@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Google Forms State To URL",
   "version": "1.0",
   "description": "Saves google forms state to URL using query params",
   "permissions": ["activeTab"],
-  "browser_action": {
+  "action": {
     "default_title": "Google Forms State To URL",
     "default_popup": "popup.html"
   },

@@ -1,10 +1,24 @@
 async function init() {
-  let [tab] = await (browser ?? chrome).tabs.query({
+  document
+    .getElementById("getPrefilledURLTrigger")
+    .addEventListener("click", async () => {
+      try {
+        const port = await setupConection();
+        port.postMessage({ action: "getPrefilledURL" });
+      } catch (e) {
+        document.getElementById("status").innerHTML = "Extension error";
+        throw e;
+      }
+    });
+}
+
+async function setupConection() {
+  const [tab] = await (chrome ?? browser).tabs.query({
     active: true,
     currentWindow: true,
   });
 
-  const port = (browser ?? chrome).tabs.connect(tab.id, {
+  const port = (chrome ?? browser).tabs.connect(tab.id, {
     name: "googleFormsStateToURL",
   });
 
@@ -15,10 +29,7 @@ async function init() {
     }
   });
 
-  const prefilledURLTrigger = document.getElementById("getPrefilledURLTrigger");
-  prefilledURLTrigger.addEventListener("click", () => {
-    port.postMessage({ action: "getPrefilledURL" });
-  });
+  return port;
 }
 
 init();
